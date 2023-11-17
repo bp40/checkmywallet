@@ -1,0 +1,60 @@
+html,
+body {
+	color: white;
+	background-color: #0f172a;
+	font-family: "Inter";
+	font-size: 24px;
+}
+
+input {
+	text-indent: 10px;
+	font-size: 14px;
+}
+
+option {
+	text-indent: 10px;
+	font-size: 14px;
+}
+
+select {
+	padding: 10px;
+	padding-top: 10px;
+}
+
+label {
+	font-size: 18px;
+}
+
+.gray-bkg {
+	background-color: #171719;
+}
+
+.title-txt {
+	display: flex;
+	padding-right: 19em;
+	padding-top: 2em;
+}
+
+.ui {
+	display: flex;
+	justify-content: baseline;
+	align-items: center;
+	flex-direction: column;
+}
+
+.search-box {
+	width: 450px;
+	height: 50px;
+}
+
+.category-box {
+	width: 250px;
+	height: 50px;
+}
+
+.add-btn {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin-top: 26px;
+}
