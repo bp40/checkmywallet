@@ -13,7 +13,7 @@ if (isset($_POST['add_tx_submit'])) {
 
     if ($type == 'Expense') {
         $type = true;
-    } else {
+    } else if ($type == 'Income') {
         $type = false;
     }
 
@@ -26,7 +26,7 @@ if (isset($_POST['add_tx_submit'])) {
 
     $stmt = $mysqli->prepare("INSERT INTO transactions (amount, category_id, goal_id, method_id, uid) VALUES (?,?,?,?,?)");
 
-    if ($type == "Expense") {
+    if ($type == "Expense" || $type == "SaveGoal") {
         $amount = $amount * -1;
     }
 

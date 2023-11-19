@@ -39,3 +39,14 @@ if (isset($_POST['edit_tx_submit'])) {
 
     header("location: wallet.php");
 }
+
+if (isset($_POST['delete_tx_submit'])) {
+
+    $txId = isset($_POST['txID']) ? $_POST['txID'] : null;
+
+    $stmt = $mysqli->prepare("DELETE FROM transactions WHERE transaction_id=?;");
+    $stmt->bind_param("i", $txId);
+    $stmt->execute();
+
+    header("location: wallet.php");
+}

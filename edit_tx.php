@@ -161,6 +161,7 @@ if (isset($_POST['submitEdit'])) {
                     <input type="hidden" name="type" id="type" value="Income">
                     <input type="hidden" name="txID" value="<?php echo $txID ?>">
                     <button type="submit" name="edit_tx_submit" class="btn bg-purple-600 px-2"> EDIT </button>
+                    <button type="submit" name="delete_tx_submit" class="btn bg-purple-600 px-2"> DELETE </button>
                 </div>
             </div>
         </form>

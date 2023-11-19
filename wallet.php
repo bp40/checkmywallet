@@ -81,11 +81,21 @@ require_once('connect.php');
 
         <!-- Balance -->
         <?php
+        $q = 'SELECT SUM(amount) FROM transactions WHERE uid = ' . $_SESSION["uid"] . ' AND goal_id IS NULL';
+
+        if ($result = $mysqli->query($q)) {
+            while ($row = $result->fetch_array()) {
+                echo "Total Balance = " . $row[0];
+            }
+        }
+
+        echo '<br>';
+
         $q = 'SELECT SUM(amount) FROM transactions WHERE uid = ' . $_SESSION["uid"] . '';
 
         if ($result = $mysqli->query($q)) {
             while ($row = $result->fetch_array()) {
-                echo "Current balance = " . $row[0];
+                echo "Usable Balance (not in goals) = " . $row[0];
             }
         }
         ?>
@@ -128,42 +138,51 @@ require_once('connect.php');
             $allquery .= "LIMIT " . $LIMIT_BEGIN . "," . $LIMIT_END . "";
 
             if ($result = $mysqli->query($allquery)) {
-                while ($row = $result->fetch_array()) {
+                while ($row = $result->fetch_assoc()) {
 
 
                     $color = 'green';
                     $type = 'Income';
-                    if ($row[0] < 0) {
+                    if ($row['amount'] < 0) {
                         $type = 'Expense';
                         $color = 'red';
+                    }
+
+                    if (isset($row['goal_name'])) {
+                        $type = 'Transfer to Goal';
+                        $color = 'orange';
                     }
 
                     echo '<div class="bg-gray-800 p-4 m-4 rounded-lg shadow-md flex items-center justify-between text-white w-full  ">';
                     echo '    <div>';
                     echo '        <span class="text-lg font-semibold text-' . $color . '-500">' . $type . '</span>';
-                    echo '        <p class="text-yellow-400">Category: ' . $row[2] . '</p>';
-                    echo '    <p class="text-gray-400">' . $row[1] . '</p>';
-                    echo '    <p class="text-gray-400">' . $row[3] . '</p>';
-                    if ($row[4] != null) {
-                        echo '    <p class="text-gray-400"> For Goal:' . $row[4] . '</p>';
+                    echo '        <p class="text-yellow-400">Category: ' . $row['category_name'] . '</p>';
+                    echo '    <p class="text-gray-400">' . $row['method_name'] . '</p>';
+                    echo '    <p class="text-gray-400">' . $row['transaction_time'] . '</p>';
+                    if ($row['goal_name'] != null) {
+                        echo '    <p class="text-yellow-200"> For Goal : ' . $row['goal_name'] . '</p>';
                     }
                     echo '    </div>';
-                    if ($row[0] > 0) {
+                    if ($type == 'Income') {
                         echo '    <div class="text-2xl font-bold text-green-600">';
-                        echo $row[0];
+                        echo $row['amount'];
+                        echo '    </div>';
+                    } else if ($type == 'Expense') {
+                        echo '    <div class="text-2xl font-bold text-red-600">';
+                        echo $row['amount'];
                         echo '    </div>';
                     } else {
-                        echo '    <div class="text-2xl font-bold text-red-600">';
-                        echo $row[0];
+                        echo '    <div class="text-2xl font-bold text-yellow-600">';
+                        echo $row['amount'];
                         echo '    </div>';
                     }
                     echo '<form action="edit_tx.php" method="post">';
-                    echo '    <input type="hidden" name="txId" value="' . $row[5] . '"/>';
-                    echo '    <input type="hidden" name="amount" value="' . $row[0] . '"/>';
-                    echo '    <input type="hidden" name="method" value="' . $row[1] . '"/>';
-                    echo '    <input type="hidden" name="category" value="' . $row[2] . '"/>';
-                    echo '    <input type="hidden" name="methodID" value="' . $row[6] . '"/>';
-                    echo '    <input type="hidden" name="categoryID" value="' . $row[7] . '"/>';
+                    echo '    <input type="hidden" name="txId" value="' . $row['transaction_id'] . '"/>';
+                    echo '    <input type="hidden" name="amount" value="' . $row['amount'] . '"/>';
+                    echo '    <input type="hidden" name="method" value="' . $row['method_name'] . '"/>';
+                    echo '    <input type="hidden" name="category" value="' . $row['category_name'] . '"/>';
+                    echo '    <input type="hidden" name="methodID" value="' . $row['method_id'] . '"/>';
+                    echo '    <input type="hidden" name="categoryID" value="' . $row['category_id'] . '"/>';
                     echo '    <button type="submit" name="submitEdit" class="bg-purple-600 text-white px-4 py-2 rounded-full">Edit</button>';
                     echo '</form>';
                     echo '</div>';
