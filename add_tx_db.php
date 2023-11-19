@@ -1,7 +1,9 @@
 <?php
 
+require __DIR__ . '/header_script.php';
 session_start();
 require_once('connect.php');
+verifySession();
 
 if (isset($_POST['add_tx_submit'])) {
 

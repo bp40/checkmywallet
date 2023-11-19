@@ -1,6 +1,8 @@
 <?php
+require __DIR__ . '/header_script.php';
 session_start();
-require_once("connect.php");
+require_once('connect.php');
+verifySession();
 
 if (isset($_POST['submitEdit'])) {
     $txID = isset($_POST["txId"]) ? $_POST["txId"] : null;

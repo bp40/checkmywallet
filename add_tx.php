@@ -1,6 +1,8 @@
 <?php
+require __DIR__ . '/header_script.php';
 session_start();
-require_once("connect.php");
+require_once('connect.php');
+verifySession();
 ?>
 <html>
 

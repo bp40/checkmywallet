@@ -18,9 +18,12 @@ if (isset($_POST['signin'])) {
         $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวระหว่าง 5 ถึง 20 ตัวอักษร';
         header("location: signin.php");
     } else {
-        $q = "SELECT * FROM admin WHERE username = '$username';";
+        $stmt = $mysqli->prepare("SELECT * FROM admin WHERE username=?;");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        $row = mysqli_fetch_row($mysqli->query($q));
+        $row = $result->fetch_row();
 
         var_dump($row);
 

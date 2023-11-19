@@ -33,7 +33,7 @@ require_once('../connect.php');
                     <?php
                     echo $_SESSION['success'];
                     unset($_SESSION['success']);
-                    header('Location: wallet.php')
+                    header('Location: category.php')
                     ?>
                 </div>
             <?php } ?>

@@ -1,6 +1,9 @@
 <?php
+require __DIR__ . '/header_script.php';
 session_start();
 require_once('connect.php');
+verifySession();
+
 ?>
 <html>
 
@@ -81,11 +84,17 @@ require_once('connect.php');
 
         <!-- Balance -->
         <?php
+        echo '<div class="flex">';
         $q = 'SELECT SUM(amount) FROM transactions WHERE uid = ' . $_SESSION["uid"] . ' AND goal_id IS NULL';
 
         if ($result = $mysqli->query($q)) {
             while ($row = $result->fetch_array()) {
-                echo "Total Balance = " . $row[0];
+                echo '
+                <div class="bg-gray-800 p-4 m-4 rounded-lg shadow-md text-white">
+                    <h2 class="text-m font-bold mb-4">Total Balance</h2>
+                    <p class="text-lg font-bold"> ' . $row[0]  . '</p>
+                </div>
+              ';
             }
         }
 
@@ -95,9 +104,15 @@ require_once('connect.php');
 
         if ($result = $mysqli->query($q)) {
             while ($row = $result->fetch_array()) {
-                echo "Usable Balance (not in goals) = " . $row[0];
+                echo '
+                <div class="bg-gray-800 p-4 m-4 rounded-lg shadow-md text-white">
+                    <h2 class="text-m font-bold mb-4">Available Balance</h2>
+                    <p class="text-lg font-bold"> ' . $row[0]  . '</p>
+                </div>
+              ';
             }
         }
+        echo '</div>';
         ?>
 
         <!-- Results -->
@@ -176,16 +191,16 @@ require_once('connect.php');
                         echo $row['amount'];
                         echo '    </div>';
                     }
-                    echo '<form action="edit_tx.php" method="post">';
-                    echo '    <input type="hidden" name="txId" value="' . $row['transaction_id'] . '"/>';
-                    echo '    <input type="hidden" name="amount" value="' . $row['amount'] . '"/>';
-                    echo '    <input type="hidden" name="method" value="' . $row['method_name'] . '"/>';
-                    echo '    <input type="hidden" name="category" value="' . $row['category_name'] . '"/>';
-                    echo '    <input type="hidden" name="methodID" value="' . $row['method_id'] . '"/>';
-                    echo '    <input type="hidden" name="categoryID" value="' . $row['category_id'] . '"/>';
-                    echo '    <button type="submit" name="submitEdit" class="bg-purple-600 text-white px-4 py-2 rounded-full">Edit</button>';
-                    echo '</form>';
-                    echo '</div>';
+                    echo '<form action="edit_tx.php" method="post">
+                         <input type="hidden" name="txId" value="' . $row['transaction_id'] . '"/>
+                         <input type="hidden" name="amount" value="' . $row['amount'] . '"/>
+                         <input type="hidden" name="method" value="' . $row['method_name'] . '"/>
+                         <input type="hidden" name="category" value="' . $row['category_name'] . '"/>
+                         <input type="hidden" name="methodID" value="' . $row['method_id'] . '"/>
+                         <input type="hidden" name="categoryID" value="' . $row['category_id'] . '"/>
+                         <button type="submit" name="submitEdit" class="bg-purple-600 text-white px-4 py-2 rounded-full">Edit</button>
+                     </form>
+                     </div>';
                 }
             } else {
                 echo 'Query error: ' . $mysqli->error;
