@@ -24,7 +24,7 @@ verifySession();
 
     <div>
       <button class="btn btn-primary rounded bg-purple-600 px-2"> <a href="wallet.php">Back to Wallet</a> </button>
-      <button class="btn btn-primary rounded bg-purple-600 px-2"> Add new Goal </button>
+      <button class="btn btn-primary rounded bg-purple-600 px-2"><a href="add_goals.php">Add new Goal</a> </button>
     </div>
 
     <div class="flex flex-col w-2/3 justify-evenly">
