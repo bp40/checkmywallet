@@ -7,11 +7,12 @@ verifySession();
 
 if (isset($_POST['add_tx_submit'])) {
 
-    $amount = $_POST['amount'];
-    $cat_id = $_POST['category'];
-    $type = $_POST['type'];
-    $method = $_POST['method'];
-    $goal = $_POST['goal'];
+    $amount = $_POST['amount'] ?? null;
+    $cat_id = $_POST['category'] ?? null;
+    $type = $_POST['type'] ?? null;
+    $method = $_POST['method'] ?? null;
+    $goal = $_POST['goal'] ?? null;
+
 
     if ($type == 'Expense') {
         $type = true;
