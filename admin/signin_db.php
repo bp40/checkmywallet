@@ -33,7 +33,7 @@ if (isset($_POST['signin'])) {
             $_SESSION["login"] = "True";
             $_SESSION['success'] = 'Success';
             $_SESSION["uid"] = $row[0];
-            $_SESSION["username"] = $username;
+            $_SESSION["username"] = htmlspecialchars($username);
             $_SESSION["user_type"] = "admin";
             header("Location: signin.php");
             exit();

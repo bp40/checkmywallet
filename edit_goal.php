@@ -31,7 +31,7 @@ if (isset($_POST['edit_goal_submit'])) {
         <!-- Title -->
         <div class="title-txt mx-4 ">
             <?php
-            echo '<h1 class="mb-4 text-2xl"> Check My Wallet Plz : Editing Goal ' . $goal_name . ' </h1>'
+            echo '<h1 class="mb-4 text-2xl"> Check My Wallet Plz : Editing Goal ' . htmlspecialchars($goal_name) . ' </h1>'
             ?>
         </div>
 

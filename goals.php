@@ -41,10 +41,10 @@ verifySession();
           echo '
                     <div class="w-100 bg-gray-800 rounded overflow-hidden shadow-lg m-4">
                     <div class="flex justify-between items-center px-6 py-3">
-                      <div class="font-bold text-lg">' . $row["goal_name"] . '</div>
+                      <div class="font-bold text-lg">' . htmlspecialchars($row['goal_name']) . '</div>
                       <form action="./edit_goal.php" method="post">
                         <input type="hidden" name="goal_id" value="' . $row['goal_id'] . '"/>
-                        <input type="hidden" name="goal_name" value="' . $row['goal_name'] . '"/>
+                        <input type="hidden" name="goal_name" value="' . htmlspecialchars($row['goal_name']) . '"/>
                          <input type="hidden" name="goal_amount" value="' . $row['goal_amount'] . '"/>
                          <input type="hidden" name="goal_date" value="' . $row['goal_date'] . '"/>
                         <button type="submit" name="edit_goal_submit" class="text-blue-500 hover:text-blue-700 focus:outline-none">Edit</button>
