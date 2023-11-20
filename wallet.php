@@ -228,6 +228,10 @@ verifySession();
             ?>
         </div>
 
+        <div class="flex justify-center mt-4 mb-8">
+            <button class="btn btn-primary rounded bg-red-600 px-2"> <a href="logout.php"> Logout </a> </button>
+        </div>
+
 </body>
 
 </html>

@@ -3,6 +3,10 @@
 session_start();
 require_once('connect.php');
 
+if (isset($_SESSION["uid"])) {
+    header("location: wallet.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
