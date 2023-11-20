@@ -33,14 +33,26 @@ if (isset($_POST['submitEdit'])) {
 <body>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            handleSelection();
+        });
+
+
         const disableGoal = () => {
+            console.log('disable goal')
             var goal_select = document.getElementById('goal')
+            var goal_label = document.getElementById('goalLabel')
             goal_select.disabled = true
+            goal_select.value = -1
+            goal_label.classList.add('line-through')
         }
 
         const enableGoal = () => {
+            console.log('enable goal')
             var goal_select = document.getElementById('goal')
+            var goal_label = document.getElementById('goalLabel')
             goal_select.disabled = false
+            goal_label.classList.remove('line-through')
         }
 
         const setExpense = () => {
@@ -53,41 +65,47 @@ if (isset($_POST['submitEdit'])) {
             txType.value = "Income"
         }
 
+        const setSaveGoal = () => {
+            var txType = document.getElementById('type')
+            txType.value = "SaveGoal"
+        }
+
         const handleSelection = () => {
+            console.log('handled change')
             var selectedOption = document.getElementById("categories");
             var isExpense = selectedOption.options[selectedOption.selectedIndex].classList.contains("text-red-400");
+            var isSaveGoal = selectedOption.options[selectedOption.selectedIndex].classList.contains("text-yellow-400");
 
             if (isExpense) {
+
+
                 setExpense();
                 selectedOption.classList.remove('text-gray-400')
                 selectedOption.classList.remove('text-green-400')
+                selectedOption.classList.remove('text-yellow-400')
                 selectedOption.classList.add('text-red-400')
                 disableGoal();
+
+            } else if (isSaveGoal) {
+
+                setSaveGoal();
+                selectedOption.classList.remove('text-gray-400')
+                selectedOption.classList.remove('text-green-400')
+                selectedOption.classList.remove('text-red-400')
+                selectedOption.classList.add('text-yellow-400')
+                enableGoal();
+
             } else {
+
                 setIncome();
                 selectedOption.classList.remove('text-gray-400')
                 selectedOption.classList.remove('text-red-400')
+                selectedOption.classList.remove('text-yellow-400')
                 selectedOption.classList.add('text-green-400')
-                enableGoal();
+                disableGoal();
             }
-
         }
     </script>
-
-    <?php
-    if ($_POST["amount"] < 0) {
-        echo '<script>';
-        echo 'window.onload = function() {';
-        echo '  setExpense();';
-        echo '  selectedOption.classList.remove("text-gray-400");';
-        echo '  selectedOption.classList.remove("text-green-400");';
-        echo '  selectedOption.classList.add("text-red-400");';
-        echo '  disableGoal();';
-        echo '};';
-        echo '</script>';
-    }
-    ?>
-
 
     <div class="ui">
         <!-- Title -->
@@ -110,11 +128,16 @@ if (isset($_POST['submitEdit'])) {
 
                         $q = 'SELECT category_id, category_name, is_expense from categories ORDER BY is_expense ASC;';
                         if ($result = $mysqli->query($q)) {
-                            while ($row = $result->fetch_array()) {
-                                if ($row[2] == true) {
-                                    echo '<option class="text-red-400" value="' . $row[0] . '">' . $row[1] . '</option>';
+                            while ($row = $result->fetch_assoc()) {
+                                if ($row['is_expense'] == true) {
+
+                                    if ($row['category_name'] == 'Transfer to savings goal') {
+                                        echo '<option class="text-yellow-400" value="' . $row['category_id'] . '">' . $row['category_name'] . '</option>';
+                                    } else {
+                                        echo '<option class="text-red-400" value="' . $row['category_id'] . '">' . $row['category_name'] . '</option>';
+                                    }
                                 } else {
-                                    echo '<option class="text-green-400" value="' . $row[0] . '">' . $row[1] . '</option>';
+                                    echo '<option class="text-green-400" value="' . $row['category_id'] . '">' . $row['category_name'] . '</option>';
                                 }
                             }
                         } else {
@@ -143,7 +166,7 @@ if (isset($_POST['submitEdit'])) {
                 </div>
 
                 <div class="px-2">
-                    <label class="block">Put into goal </label>
+                    <label id='goalLabel' class="block">Put into goal </label>
                     <select name="goal" id="goal" class="category-box rounded text-gray-400 gray-bkg">
                         <?php
                         $q = 'SELECT goal_id, goal_name from savings_goal WHERE uid = ' . $_SESSION["uid"] . ';';
