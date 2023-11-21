@@ -163,7 +163,7 @@ verifySession();
                 $filterCategory = "AND c.category_id = " . $category . " ";
                 $allquery .= $filterCategory;
             }
-            $allquery .= "ORDER BY transaction_time DESC ";
+            $allquery .= "ORDER BY transaction_id DESC ";
             $allquery .= "LIMIT " . $LIMIT_BEGIN . "," . $LIMIT_END . "";
 
             if ($result = $mysqli->query($allquery)) {
