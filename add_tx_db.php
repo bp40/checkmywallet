@@ -36,8 +36,6 @@ if (isset($_POST['add_tx_submit'])) {
     $stmt->bind_param("diiii", $amount, $cat_id, $goal, $method, $_SESSION["uid"]);
     $stmt->execute();
 
-    echo "Inserted sucessfully";
-
     header("location: wallet.php");
     die();
 }
