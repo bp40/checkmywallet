@@ -14,8 +14,6 @@ if (isset($_POST['add_goal_submit'])) {
     $stmt->bind_param("sisi", $goal_name, $goal_amount, $goal_date, $_SESSION["uid"]);
     $stmt->execute();
 
-    echo "Inserted sucessfully";
-
     header("location: wallet.php");
     die();
 }

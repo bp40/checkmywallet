@@ -15,8 +15,6 @@ if (isset($_POST["submit_goal_edit"])) {
     $stmt->bind_param("sisi", $goal_name, $goal_amount, $goal_date, $goal_id);
     $stmt->execute();
 
-    echo "Edited sucessfully";
-
     header("location: wallet.php");
     die();
 }
