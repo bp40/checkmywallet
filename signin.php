@@ -5,6 +5,7 @@ require_once('connect.php');
 
 if (isset($_SESSION["uid"])) {
     header("location: wallet.php");
+    die();
 }
 
 ?>
@@ -38,6 +39,7 @@ if (isset($_SESSION["uid"])) {
                     echo $_SESSION['success'];
                     unset($_SESSION['success']);
                     header('Location: wallet.php')
+                    die();
                     ?>
                 </div>
             <?php } ?>

@@ -6,10 +6,12 @@ function verifySession()
         if ($_SESSION['user_type'] == 'admin') {
             session_destroy();
             header("Location: signin.php");
+            die();
         }
     }
 
     if (!isset($_SESSION['uid'])) {
         header("Location: signin.php");
+        die();
     }
 }

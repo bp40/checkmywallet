@@ -11,12 +11,15 @@ if (isset($_POST['signin'])) {
     if (empty($username)) {
         $_SESSION['error'] = 'กรุณากรอกชื่อผู้ใช้';
         header("location: signin.php");
+        die();
     } else if (empty($password)) {
         $_SESSION['error'] = 'กรุณากรอกรหัสผ่าน';
         header("location: signin.php");
+        die();
     } else if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
         $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวระหว่าง 5 ถึง 20 ตัวอักษร';
         header("location: signin.php");
+        die();
     } else {
         $q = "SELECT * FROM users WHERE username = '$username';";
 

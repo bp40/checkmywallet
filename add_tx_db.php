@@ -39,4 +39,5 @@ if (isset($_POST['add_tx_submit'])) {
     echo "Inserted sucessfully";
 
     header("location: wallet.php");
+    die();
 }

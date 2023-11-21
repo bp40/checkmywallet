@@ -35,18 +35,18 @@ require_once('../connect.php');
             </thead>
             <tbody>
                 <?php
-                    $q = 'select * from categories;';
-                    if ($result = $mysqli->query($q)) {
-                        while ($row = $result->fetch_array()) {
-                            echo '<tr>';
-                            echo '<th>'.$row[0].'</th>';
-                            echo '<th>'.$row[1].'</th>';
-                            echo '<th>'.$row[2].'</th>';
-                            echo '<tr>';
-                        }
-                    } else {
-                        echo 'Query error: ' . $mysqli->error;
+                $q = 'select * from categories;';
+                if ($result = $mysqli->query($q)) {
+                    while ($row = $result->fetch_array()) {
+                        echo '<tr>';
+                        echo '<th>' . $row[0] . '</th>';
+                        echo '<th>' . $row[1] . '</th>';
+                        echo '<th>' . $row[2] . '</th>';
+                        echo '<tr>';
                     }
+                } else {
+                    echo 'Query error: ' . $mysqli->error;
+                }
                 ?>
             </tbody>
         </table>

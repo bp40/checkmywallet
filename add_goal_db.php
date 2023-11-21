@@ -17,4 +17,5 @@ if (isset($_POST['add_goal_submit'])) {
     echo "Inserted sucessfully";
 
     header("location: wallet.php");
+    die();
 }

@@ -5,6 +5,7 @@ require_once('connect.php');
 
 if (isset($_SESSION["uid"])) {
     header("location: wallet.php");
+    die();
 }
 
 ?>

@@ -18,4 +18,5 @@ if (isset($_POST["submit_goal_edit"])) {
     echo "Edited sucessfully";
 
     header("location: wallet.php");
+    die();
 }

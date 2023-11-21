@@ -40,6 +40,7 @@ if (isset($_POST['edit_tx_submit'])) {
     echo "Edited sucessfully";
 
     header("location: wallet.php");
+    die();
 }
 
 if (isset($_POST['delete_tx_submit'])) {
@@ -51,4 +52,5 @@ if (isset($_POST['delete_tx_submit'])) {
     $stmt->execute();
 
     header("location: wallet.php");
+    die();
 }
