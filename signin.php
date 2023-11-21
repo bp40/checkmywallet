@@ -38,7 +38,7 @@ if (isset($_SESSION["uid"])) {
                     <?php
                     echo $_SESSION['success'];
                     unset($_SESSION['success']);
-                    header('Location: wallet.php')
+                    header('Location: wallet.php');
                     die();
                     ?>
                 </div>

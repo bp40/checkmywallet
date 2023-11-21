@@ -33,7 +33,7 @@ require_once('../connect.php');
                     <?php
                     echo $_SESSION['success'];
                     unset($_SESSION['success']);
-                    header('Location: category.php')
+                    header('Location: category.php');
                     die();
                     ?>
                 </div>

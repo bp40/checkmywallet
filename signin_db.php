@@ -9,15 +9,15 @@ if (isset($_POST['signin'])) {
 
 
     if (empty($username)) {
-        $_SESSION['error'] = 'กรุณากรอกชื่อผู้ใช้';
+        $_SESSION['error'] = 'Please add username';
         header("location: signin.php");
         die();
     } else if (empty($password)) {
-        $_SESSION['error'] = 'กรุณากรอกรหัสผ่าน';
+        $_SESSION['error'] = 'Please add password';
         header("location: signin.php");
         die();
     } else if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
-        $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวระหว่าง 5 ถึง 20 ตัวอักษร';
+        $_SESSION['error'] = 'Password must be 5-20 characters';
         header("location: signin.php");
         die();
     } else {
@@ -38,7 +38,7 @@ if (isset($_POST['signin'])) {
             exit();
         } else {
             $_SESSION["login"] = "False";
-            $_SESSION['error'] = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
+            $_SESSION['error'] = 'Incorrect username/password';
             header("Location: signin.php");
             exit();
         }
