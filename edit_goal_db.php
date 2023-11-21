@@ -20,3 +20,15 @@ if (isset($_POST["submit_goal_edit"])) {
     header("location: wallet.php");
     die();
 }
+
+if (isset($_POST['submit_goal_delete'])) {
+
+    $goal_id = $_POST['goal_id'] ?? null;
+
+    $stmt = $mysqli->prepare("DELETE FROM savings_goal WHERE goal_id=?;");
+    $stmt->bind_param("i", $goal_id);
+    $stmt->execute();
+
+    header("location: wallet.php");
+    die();
+}

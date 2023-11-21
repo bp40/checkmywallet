@@ -14,19 +14,17 @@ if (isset($_POST['edit_tx_submit'])) {
     $goal = isset($_POST['goal']) ? $_POST['goal'] : null;
     $txId = isset($_POST['txID']) ? $_POST['txID'] : null;
 
-    if ($type == 'Expense') {
-        $type = true;
-    } else {
-        $type = false;
-    }
 
-    if (!is_int($goal) || $goal <= 0) {
+    if (!ctype_digit($goal)) {
         $goal = NULL;
+    } else {
+        $goal = (int) $goal;
     }
 
     $stmt = $mysqli->prepare("UPDATE transactions SET amount=?, category_id=?, goal_id=?, method_id=?, transaction_time=transaction_time WHERE transaction_id=?;");
 
-    if ($type == "Expense") {
+    //cat id=5 is transfer to goal
+    if ($type == "Expense" || $cat_id == 5) {
         $amount = abs($amount) * -1;
     } else {
         $amount = abs($amount);

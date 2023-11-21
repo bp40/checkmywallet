@@ -89,10 +89,17 @@ verifySession();
 
         if ($result = $mysqli->query($q)) {
             while ($row = $result->fetch_array()) {
+
+                if ($row[0] >= 0) {
+                    $amountColor = 'blue';
+                } else {
+                    $amountColor = 'red';
+                }
+
                 echo '
                 <div class="bg-gray-800 p-4 m-4 rounded-lg shadow-md text-white">
                     <h2 class="text-m font-bold mb-4">Total Balance</h2>
-                    <p class="text-lg font-bold"> ' . $row[0]  . '</p>
+                    <p class="text-lg font-bold text-' . $amountColor . '-400"> ' . $row[0]  . '</p>
                 </div>
               ';
             }
@@ -104,10 +111,17 @@ verifySession();
 
         if ($result = $mysqli->query($q)) {
             while ($row = $result->fetch_array()) {
+
+                if ($row[0] >= 0) {
+                    $amountColor = 'blue';
+                } else {
+                    $amountColor = 'red';
+                }
+
                 echo '
                 <div class="bg-gray-800 p-4 m-4 rounded-lg shadow-md text-white">
                     <h2 class="text-m font-bold mb-4">Available Balance</h2>
-                    <p class="text-lg font-bold"> ' . $row[0]  . '</p>
+                    <p class="text-lg font-bold text-' . $amountColor . '-400"> ' . $row[0]  . '</p>
                 </div>
               ';
             }

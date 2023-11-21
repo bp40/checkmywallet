@@ -57,6 +57,11 @@ if (isset($_POST['edit_goal_submit'])) {
                 <button type="submit" name="submit_goal_edit" class="btn bg-purple-600 px-2"> Edit Goal </button>
             </div>
 
+            <div class="px-2 py-2">
+                <input type="hidden" value="<?php echo $goal_id ?>" name="goal_id">
+                <button type="submit" name="submit_goal_delete" class="btn bg-red-600 px-2"> Delete Goal </button>
+            </div>
+
         </form>
     </div>
 </body>
