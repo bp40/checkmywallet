@@ -117,7 +117,7 @@ if (isset($_POST['submitEdit'])) {
             <div class="add-controls">
                 <div class="px-2">
                     <label class="block">Amount (no minus sign)</label>
-                    <input value="<?php echo $amount ?>" name="amount" type="number" min="1" step="any" class="search-box rounded text-gray-400 gray-bkg" placeholder="e.g. ฿500">
+                    <input value="<?php echo $amount ?>" name="amount" type="number" min="0" step="any" class="search-box rounded text-gray-400 gray-bkg" placeholder="e.g. ฿500">
                 </div>
 
                 <div class="px-2">

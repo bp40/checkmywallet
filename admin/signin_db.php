@@ -28,17 +28,15 @@ if (isset($_POST['signin'])) {
 
         $row = $result->fetch_row();
 
-        var_dump($row);
-
         $mysqli->close();
 
         if ($row != NULL && password_verify($password, $row[2])) {
             $_SESSION["login"] = "True";
             $_SESSION['success'] = 'Success';
-            $_SESSION["uid"] = $row[0];
+            $_SESSION["admin_uid"] = $row[0];
             $_SESSION["username"] = htmlspecialchars($username);
             $_SESSION["user_type"] = "admin";
-            header("Location: signin.php");
+            header("Location: category.php");
             exit();
         } else {
             $_SESSION["login"] = "False";

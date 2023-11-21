@@ -3,6 +3,11 @@
 session_start();
 require_once('../connect.php');
 
+if (isset($_SESSION['admin_uid'])) {
+    header("Location: category.php");
+    die();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +38,7 @@ require_once('../connect.php');
                     <?php
                     echo $_SESSION['success'];
                     unset($_SESSION['success']);
-                    header('Location: category.php');
+                    header('Location: wallet.php');
                     die();
                     ?>
                 </div>
