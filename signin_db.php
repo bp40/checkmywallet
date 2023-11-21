@@ -25,8 +25,6 @@ if (isset($_POST['signin'])) {
 
         $row = mysqli_fetch_row($mysqli->query($q));
 
-        var_dump($row);
-
         $mysqli->close();
 
         if ($row != NULL && password_verify($password, $row[2])) {

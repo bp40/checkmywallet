@@ -24,8 +24,6 @@ if (isset($_POST['edit_tx_submit'])) {
         $goal = NULL;
     }
 
-    error_log(print_r($_POST, true));
-
     $stmt = $mysqli->prepare("UPDATE transactions SET amount=?, category_id=?, goal_id=?, method_id=?, transaction_time=transaction_time WHERE transaction_id=?;");
 
     if ($type == "Expense") {
@@ -36,8 +34,6 @@ if (isset($_POST['edit_tx_submit'])) {
 
     $stmt->bind_param("diiii", $amount, $cat_id, $goal, $method, $txId);
     $stmt->execute();
-
-    echo "Edited sucessfully";
 
     header("location: wallet.php");
     die();
