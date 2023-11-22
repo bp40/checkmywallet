@@ -31,11 +31,13 @@ if (isset($_POST['signup'])) {
     } else {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-        $q = "INSERT INTO users(username, password) VALUES ('$username','$passwordHash');";
+        //$q = "INSERT INTO users(username, password) VALUES ('?','$passwordHash');";
 
+        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $username, $passwordHash);
 
-        if (!$mysqli->query($q)) {
-            // echo "UPDATE failed. Error: " . $mysqli->error;
+        if ($stmt->execute()) {
             $_SESSION['error'] = "มีบางอย่างผิดพลาด";
             header("location: index.php");
             die();

@@ -21,9 +21,17 @@ if (isset($_POST['signin'])) {
         header("location: signin.php");
         die();
     } else {
-        $q = "SELECT * FROM users WHERE username = '$username';";
+        //$q = "SELECT * FROM users WHERE username = '$username';";
+        //$row = mysqli_fetch_row($mysqli->query($q));
 
-        $row = mysqli_fetch_row($mysqli->query($q));
+        $sql = "SELECT * FROM users WHERE username = ?";
+
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
 
         $mysqli->close();
 
